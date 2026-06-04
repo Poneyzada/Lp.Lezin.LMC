@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lezin - Papatunes & LMC. Conheça o artista, ouça os lançamentos e assista aos vídeos interativos exclusivos na experiência de scroll frame a frame.">
+  <title>Lezin | Papatunes & LMC</title>
+  
+  <!-- Fontes do Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Loader da Página -->
+  <div id="loader" class="loader-container">
+    <div class="loader-content">
+      <img src="logo-papatunes.gif" alt="Papatunes Logo" class="loader-logo" id="loader-logo-img">
+      <h2 class="loader-text">CARREGANDO EXPERIÊNCIA</h2>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <p class="loader-subtext" id="loader-status">Iniciando buffers de vídeo...</p>
+    </div>
+  </div>
+
+  <!-- Header / Navbar Fixo -->
+  <header class="navbar">
+    <div class="nav-logo-container">
+      <img src="logo-papatunes.gif" alt="Papatunes Logo" class="nav-logo">
+      <span class="nav-brand">LEZIN</span>
+    </div>
+    <nav class="nav-menu">
+      <a href="#hero" class="nav-link active">Início</a>
+      <a href="#sobre" class="nav-link">Sobre</a>
+      <a href="#dobra-c" class="nav-link">Lançamento</a>
+      <a href="#galeria" class="nav-link">Galeria</a>
+      <a href="#streaming" class="nav-link btn-connect">Ouvir Agora</a>
+    </nav>
+  </header>
+
+  <!-- SEÇÃO HERO: Vídeo 1 com Scroll Scrubbing -->
+  <section id="hero" class="scroll-bound">
+    <div class="sticky-container">
+      <!-- O vídeo é controlado via JS e fica mudo para reprodução automática sem barreiras de browser -->
+      <video id="hero-video" class="scrub-video" playsinline muted preload="auto">
+        <source src="lmcc-luz.mp4" type="video/mp4">
+        Seu navegador não suporta a tag de vídeo.
+      </video>
+      <div class="video-overlay hero-overlay">
+        <div class="hero-content">
+          <p class="hero-label fade-up">PAPATUNES & LMC APRESENTAM</p>
+          <h1 class="hero-title fade-up">LEZIN</h1>
+          <p class="hero-subtitle fade-up">Role para baixo para interagir com o fluxo</p>
+        </div>
+        <div class="scroll-indicator">
+          <div class="mouse-icon">
+            <span class="mouse-wheel"></span>
+          </div>
+          <span class="scroll-text">SCROLL</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO SOBRE: Biografia e Transição -->
+  <section id="sobre" class="section-sobre">
+    <div class="glow-sphere gold-glow"></div>
+    <div class="container">
+      <div class="sobre-grid">
+        <div class="sobre-text-card glass-card">
+          <span class="badge">BIOGRAFIA</span>
+          <h2 class="section-title">A Nova Voz das Ruas</h2>
+          <p class="paragraph">
+            Diretamente sob o selo da **Papatunes**, gravadora liderada pelo lendário produtor Papatinho, **Lezin** surge como uma das vozes mais autênticas do cenário atual do Trap e Hip-Hop nacional. Com uma lírica afiada e flows que se adaptam perfeitamente a batidas pesadas e melódicas, o artista retrata a realidade e a atitude com maestria.
+          </p>
+          <p class="paragraph">
+            Em parceria com a **LMC**, o projeto consolida uma nova era de produções audiovisuais sofisticadas e narrativas envolventes. Esta landing page interativa foi projetada para que você sinta o ritmo de cada take, controlando o tempo de cada frame dos clipes oficiais com o rolar da página.
+          </p>
+          <div class="social-mini-links">
+            <a href="https://www.instagram.com/lezinlmc" target="_blank" class="mini-link-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>@lezinlmc</span>
+            </a>
+            <a href="https://www.youtube.com/@lezinlmc" target="_blank" class="mini-link-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-youtube"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+              <span>YouTube Oficial</span>
+            </a>
+          </div>
+        </div>
+        <div class="sobre-image-card">
+          <div class="image-wrapper">
+            <img src="lezin-pray.jpg" alt="Lezin rezando - Papatunes" class="sobre-img shadow-glow">
+            <div class="image-border-decoration"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO DOBRA C: Vídeo 2 com Scroll Scrubbing -->
+  <section id="dobra-c" class="scroll-bound">
+    <div class="sticky-container">
+      <video id="dobra-c-video" class="scrub-video" playsinline muted preload="auto">
+        <source src="Lmcmelhor-venda.mp4" type="video/mp4">
+        Seu navegador não suporta a tag de vídeo.
+      </video>
+      <div class="video-overlay dobra-c-overlay">
+        <div class="dobra-c-content container">
+          <div class="text-glass-panel">
+            <span class="badge badge-accent">DOBRA C</span>
+            <h2 class="dobra-c-title">MUITO MAIS QUE MÚSICA</h2>
+            <p class="dobra-c-desc">Estilo de vida, lírica impecável e produção cirúrgica. Sinta cada detalhe do beat e da imagem frame a frame.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO GALERIA: Imagens em Grid Moderno -->
+  <section id="galeria" class="section-galeria">
+    <div class="glow-sphere purple-glow"></div>
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge">VISUAL</span>
+        <h2 class="section-title">Galeria de Fotos</h2>
+        <p class="section-subtitle">Retratos exclusivos de Lezin em sessões de estúdio e sets de gravação.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Foto 1 (Pray) -->
+        <div class="gallery-item glass-card card-tilt" data-image="lezin-pray.jpg">
+          <div class="gallery-img-container">
+            <img src="lezin-pray.jpg" alt="Lezin - Foco e Fé" class="gallery-img">
+            <div class="gallery-hover-overlay">
+              <span class="gallery-item-title">Foco & Fé</span>
+              <span class="gallery-item-category">Estúdio</span>
+            </div>
+          </div>
+        </div>
+        <!-- Foto 2 (Corrente) -->
+        <div class="gallery-item glass-card card-tilt" data-image="lezin-corrente.jpg">
+          <div class="gallery-img-container">
+            <img src="lezin-corrente.jpg" alt="Lezin - Detalhes" class="gallery-img">
+            <div class="gallery-hover-overlay">
+              <span class="gallery-item-title">Linhas de Ouro</span>
+              <span class="gallery-item-category">Detalhe</span>
+            </div>
+          </div>
+        </div>
+        <!-- Foto 3 (Dpe) -->
+        <div class="gallery-item glass-card card-tilt" data-image="lezin-dpe.jpg">
+          <div class="gallery-img-container">
+            <img src="lezin-dpe.jpg" alt="Lezin - Retrato" class="gallery-img">
+            <div class="gallery-hover-overlay">
+              <span class="gallery-item-title">Atitude</span>
+              <span class="gallery-item-category">Retrato</span>
+            </div>
+          </div>
+        </div>
+        <!-- Foto 4 (Blur) -->
+        <div class="gallery-item glass-card card-tilt" data-image="lezin-blur.jpg">
+          <div class="gallery-img-container">
+            <img src="lezin-blur.jpg" alt="Lezin - Movimento" class="gallery-img">
+            <div class="gallery-hover-overlay">
+              <span class="gallery-item-title">Estética Noturna</span>
+              <span class="gallery-item-category">Motion</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO STREAMING: Links para as Plataformas -->
+  <section id="streaming" class="section-streaming">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge">CONEXÃO</span>
+        <h2 class="section-title">Ouça Lezin nas Plataformas</h2>
+        <p class="section-subtitle">Escolha o seu serviço de streaming favorito e adicione o som do trap à sua playlist.</p>
+      </div>
+
+      <div class="streaming-grid">
+        <!-- Spotify Card -->
+        <a href="https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg" target="_blank" class="streaming-card glass-card spotify-hover">
+          <div class="card-glow-bg"></div>
+          <div class="streaming-icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" class="icon-spotify">
+              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.817 1.127.294.18.387.563.207.861zm1.226-2.723c-.226.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.076-1.183-.412.125-.845-.107-.97-.52-.125-.412.107-.845.52-.97 3.666-1.112 8.246-.575 11.34 1.327.367.227.488.708.26 1.086zm.106-2.833C14.492 8.78 8.72 8.59 5.38 9.602c-.515.156-1.05-.133-1.206-.648-.156-.514.133-1.05.648-1.206 3.83-1.162 10.202-.943 14.164 1.41.463.275.614.873.34 1.336-.275.463-.873.614-1.336.34z"/>
+            </svg>
+          </div>
+          <h3>Spotify</h3>
+          <p>Siga o artista e confira os últimos lançamentos</p>
+          <span class="action-btn">Ouvir no Spotify</span>
+        </a>
+
+        <!-- YouTube Card -->
+        <a href="https://www.youtube.com/@lezinlmc" target="_blank" class="streaming-card glass-card youtube-hover">
+          <div class="card-glow-bg"></div>
+          <div class="streaming-icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" class="icon-youtube">
+              <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.872.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </div>
+          <h3>YouTube</h3>
+          <p>Assista aos videoclipes oficiais e lives</p>
+          <span class="action-btn">Inscrever-se</span>
+        </a>
+
+        <!-- Instagram Card -->
+        <a href="https://www.instagram.com/lezinlmc" target="_blank" class="streaming-card glass-card instagram-hover">
+          <div class="card-glow-bg"></div>
+          <div class="streaming-icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-instagram">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </div>
+          <h3>Instagram</h3>
+          <p>Acompanhe o dia a dia e novidades do estúdio</p>
+          <span class="action-btn">Seguir no Instagram</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <img src="logo-papatunes.gif" alt="Papatunes Logo" class="footer-logo">
+        <p class="footer-text">PAPATUNES MUSIC & LMC © 2026. Todos os direitos reservados.</p>
+      </div>
+      <div class="footer-credits">
+        Desenvolvido com estética premium & interações de ponta.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
