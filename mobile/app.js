@@ -155,8 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (dobraCSection && dobraCPanel) {
       const rect = dobraCSection.getBoundingClientRect();
       const viewHeight = window.innerHeight;
-      
-      if (rect.top <= viewHeight * 0.4 && rect.bottom >= viewHeight * 0.2) {
+      // Painel aparece assim que a Dobra C entra na tela (imediato)
+      if (rect.top <= viewHeight * 0.95 && rect.bottom >= 0) {
         dobraCPanel.classList.add('visible');
       } else {
         dobraCPanel.classList.remove('visible');
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "JUDAS",
         type: "Single",
         year: "2024",
-        cover: "/lezin-pray.jpg",
+        cover: "https://img.youtube.com/vi/q6tF4Xn25q4/hqdefault.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=q6tF4Xn25q4",
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "GANA",
         type: "Single",
         year: "2024",
-        cover: "/lezin-corrente.jpg",
+        cover: "https://img.youtube.com/vi/wXQJ5_fM18I/hqdefault.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=wXQJ5_fM18I",
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "MUSTANG",
         type: "Single",
         year: "2023",
-        cover: "/lezin-blur.jpg",
+        cover: "https://img.youtube.com/vi/pWb8X95qU4w/hqdefault.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=pWb8X95qU4w",
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "ALICE",
         type: "Single",
         year: "2023",
-        cover: "/lezin-dpe.jpg",
+        cover: "https://img.youtube.com/vi/W79U4U879y0/hqdefault.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=W79U4U879y0",
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "BERÇO DO TRAP",
         type: "Single",
         year: "2022",
-        cover: "/lezin-pray.jpg",
+        cover: "https://img.youtube.com/vi/cM3kZ3J5q5k/hqdefault.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=cM3kZ3J5q5k",
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "O Dono das Ruas",
         type: "Álbum",
         year: "2024",
-        cover: "/lezin-dpe.jpg",
+        cover: "https://img.youtube.com/vi/q6tF4Xn25q4/hqdefault.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/@lezinlmc",

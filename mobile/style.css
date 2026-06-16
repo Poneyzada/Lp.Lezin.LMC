@@ -181,20 +181,12 @@ body {
 
 .scroll-bound {
   position: relative;
-  height: 100vh; /* Uma tela exata no mobile: sem espaço preto vazio */
+  height: 100vh;
   width: 100%;
-  background-color: var(--bg-primary);
-  background-size: cover;
-  background-position: center;
+  background: radial-gradient(ellipse at center, #0a0a0c 0%, var(--bg-primary) 100%);
 }
 
-/* Fallback de imagem para quando o vídeo não carrega no mobile */
-#hero.scroll-bound {
-  background-image: url('/lezin-blur.jpg');
-}
-#dobra-c.scroll-bound {
-  background-image: url('/lezin-dpe.jpg');
-}
+/* Sem imagem estática de fundo - o vídeo ou gradiente dark preenche */
 
 .sticky-container {
   position: sticky;
