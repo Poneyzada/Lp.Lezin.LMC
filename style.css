@@ -259,7 +259,7 @@ body {
 
 .scroll-bound {
   position: relative;
-  height: 160vh;
+  height: 130vh;
   width: 100%;
   background: radial-gradient(ellipse at center, #0a0a0c 0%, var(--bg-primary) 100%);
 }

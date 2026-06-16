@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // 2. AUTOPLAY MOBILE: Vídeos tocam automaticamente quando visíveis (mais confiável no mobile)
+  // 2. LOGICA DE SCROLL-DRIVEN VIDEO SCRUBBING (SUAVE MOBILE)
   function isElementInViewport(el) {
     const rect = el.getBoundingClientRect();
     return (
@@ -121,32 +121,68 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  function handleMobileAutoplay() {
+  function updateVideoTargets() {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+
     videoScrubbers.forEach(scrubber => {
-      if (!scrubber.video) return;
-      
-      if (isElementInViewport(scrubber.section)) {
-        if (scrubber.video.paused) {
-          scrubber.video.loop = true;
-          scrubber.video.muted = true;
-          const p = scrubber.video.play();
-          if (p && typeof p.catch === 'function') p.catch(() => {});
-        }
+      if (!scrubber.loaded || !scrubber.video) return;
+
+      const sectionRect = scrubber.section.getBoundingClientRect();
+      const sectionTop = scrollY + sectionRect.top;
+      const sectionHeight = scrubber.section.offsetHeight;
+      const stickyRange = sectionHeight - windowHeight;
+
+      let startScrub, endScrub;
+
+      if (scrubber.section.id === 'hero') {
+        startScrub = 0;
+        endScrub = stickyRange * 0.80;
       } else {
-        if (!scrubber.video.paused) {
-          scrubber.video.pause();
-        }
+        // O vídeo começa a tocar ASSIM que a seção entra na parte de baixo da tela
+        startScrub = sectionTop - windowHeight;
+        endScrub = sectionTop + stickyRange * 0.80;
+      }
+
+      const range = endScrub - startScrub;
+      let progress = (scrollY - startScrub) / range;
+      progress = Math.max(0, Math.min(1, progress));
+
+      if (scrubber.video.duration) {
+        scrubber.targetTime = progress * scrubber.video.duration;
       }
     });
   }
 
+  function smoothPlayVideoLoop() {
+    videoScrubbers.forEach(scrubber => {
+      if (!scrubber.loaded || !scrubber.video) return;
+
+      if (isElementInViewport(scrubber.section)) {
+        const easing = 0.08; // Valor de easing otimizado para scroll de toque
+        const diff = scrubber.targetTime - scrubber.currentTime;
+
+        if (Math.abs(diff) < 0.01) {
+          scrubber.currentTime = scrubber.targetTime;
+        } else {
+          scrubber.currentTime += diff * easing;
+        }
+
+        try {
+          scrubber.video.currentTime = scrubber.currentTime;
+        } catch (e) {}
+      }
+    });
+
+    requestAnimationFrame(smoothPlayVideoLoop);
+  }
+
+  requestAnimationFrame(smoothPlayVideoLoop);
+
   window.addEventListener('scroll', () => {
-    handleMobileAutoplay();
+    updateVideoTargets();
     animateOnScroll();
   });
-
-  // Trigger initial check
-  setTimeout(handleMobileAutoplay, 1000);
 
 
   // 3. ANIMAÇÃO DE FADE-IN NO SCROLL
