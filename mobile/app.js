@@ -64,17 +64,25 @@ document.addEventListener('DOMContentLoaded', () => {
         scrubber.loaded = true;
         
         // Force pre-play and pause to load buffer and render first frame on mobile
-        v.play().then(() => {
+        const playPromise = v.play();
+        if (playPromise !== undefined && typeof playPromise.then === 'function') {
+          playPromise.then(() => {
+            v.pause();
+            try {
+              v.currentTime = 0.001;
+            } catch (e) {}
+          }).catch(err => {
+            console.warn("Mobile auto-play blocked or play/pause init failed:", err);
+            try {
+              v.currentTime = 0.001;
+            } catch (e) {}
+          });
+        } else {
           v.pause();
           try {
             v.currentTime = 0.001;
           } catch (e) {}
-        }).catch(err => {
-          console.warn("Mobile auto-play blocked or play/pause init failed:", err);
-          try {
-            v.currentTime = 0.001;
-          } catch (e) {}
-        });
+        }
 
         checkAllAssetsLoaded();
       }

@@ -68,17 +68,25 @@ document.addEventListener('DOMContentLoaded', () => {
         scrubber.loaded = true;
         
         // Force pre-play and pause to load buffer and render first frame
-        v.play().then(() => {
+        const playPromise = v.play();
+        if (playPromise !== undefined && typeof playPromise.then === 'function') {
+          playPromise.then(() => {
+            v.pause();
+            try {
+              v.currentTime = 0.001;
+            } catch (e) {}
+          }).catch(err => {
+            console.warn("Auto-play blocked or play/pause init failed:", err);
+            try {
+              v.currentTime = 0.001;
+            } catch (e) {}
+          });
+        } else {
           v.pause();
           try {
             v.currentTime = 0.001;
           } catch (e) {}
-        }).catch(err => {
-          console.warn("Auto-play blocked or play/pause init failed:", err);
-          try {
-            v.currentTime = 0.001;
-          } catch (e) {}
-        });
+        }
         
         checkAllAssetsLoaded();
       }
@@ -239,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Animar entrada da dobra C (painel de texto glassmorphic)
     const dobraCSection = document.getElementById('dobra-c');
-    if (dobraCSection) {
+    if (dobraCSection && dobraCPanel) {
       const rect = dobraCSection.getBoundingClientRect();
       const viewHeight = window.innerHeight;
       

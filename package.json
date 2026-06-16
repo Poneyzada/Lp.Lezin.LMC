@@ -20,5 +20,8 @@
   "license": "ISC",
   "devDependencies": {
     "vite": "^5.2.11"
+  },
+  "dependencies": {
+    "puppeteer-core": "^25.1.0"
   }
 }
