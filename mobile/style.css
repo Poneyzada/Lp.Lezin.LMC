@@ -181,8 +181,19 @@ body {
 
 .scroll-bound {
   position: relative;
-  height: 160vh; /* Altura ideal de scroll no mobile para reproduzir o clipe */
+  height: 100vh; /* Uma tela exata no mobile: sem espaço preto vazio */
   width: 100%;
+  background-color: var(--bg-primary);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Fallback de imagem para quando o vídeo não carrega no mobile */
+#hero.scroll-bound {
+  background-image: url('/lezin-blur.jpg');
+}
+#dobra-c.scroll-bound {
+  background-image: url('/lezin-dpe.jpg');
 }
 
 .sticky-container {
@@ -1084,8 +1095,8 @@ body {
   padding-bottom: 128px !important;
 }
 .py-20 {
-  padding-top: 80px !important;
-  padding-bottom: 80px !important;
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
 }
 .px-6 {
   padding-left: 24px !important;

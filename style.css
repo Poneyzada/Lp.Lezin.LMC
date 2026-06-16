@@ -259,9 +259,19 @@ body {
 
 .scroll-bound {
   position: relative;
-  height: 180vh; /* Altura ideal de scroll para assistir ao vídeo sem pressa antes da próxima dobra */
+  height: 160vh; /* Reduzido: menos espaço vazio entre dobras */
   width: 100%;
   background: var(--bg-primary);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Fallback de imagem para quando o vídeo demora a carregar */
+#hero.scroll-bound {
+  background-image: url('/lezin-blur.jpg');
+}
+#dobra-c.scroll-bound {
+  background-image: url('/lezin-dpe.jpg');
 }
 
 .sticky-container {
