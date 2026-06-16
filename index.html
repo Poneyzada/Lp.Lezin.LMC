@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Lezin - Papatunes & LMC. Conheça o artista, ouça os lançamentos e assista aos vídeos interativos exclusivos na experiência de scroll frame a frame.">
-  <title>Lezin | Papatunes & LMC</title>
+  <meta name="description" content="Lezin - Papatunes & LMC. Conheça a discografia, assista aos clipes oficiais e controle a experiência de scroll frame a frame.">
+  <title>Lezin | Hub Oficial</title>
+  
+  <script>
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768) {
+      window.location.href = './mobile/';
+    }
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 768) {
+        window.location.href = './mobile/';
+      }
+    });
+  </script>
   
   <!-- Fontes do Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="antialiased text-white bg-dark">
 
   <!-- Loader da Página -->
   <div id="loader" class="loader-container">
     <div class="loader-content">
-      <img src="logo-papatunes.gif" alt="Papatunes Logo" class="loader-logo" id="loader-logo-img">
+      <img src="logo-papatunes.gif" alt="Papatunes Logo" class="loader-logo">
       <h2 class="loader-text">CARREGANDO EXPERIÊNCIA</h2>
       <div class="progress-bar-container">
         <div class="progress-bar" id="progress-bar"></div>
@@ -36,37 +47,37 @@
     <nav class="nav-menu">
       <a href="#hero" class="nav-link active">Início</a>
       <a href="#sobre" class="nav-link">Sobre</a>
-      <a href="#dobra-c" class="nav-link">Lançamento</a>
-      <a href="#galeria" class="nav-link">Galeria</a>
-      <a href="#streaming" class="nav-link btn-connect">Ouvir Agora</a>
+      <a href="#music" class="nav-link">Discografia</a>
+      <a href="#dobra-c" class="nav-link">Clipe</a>
+      <a href="#videos" class="nav-link">Hub Visual</a>
+      <a href="#contact" class="nav-link btn-connect">Shows</a>
     </nav>
   </header>
 
   <!-- SEÇÃO HERO: Vídeo 1 com Scroll Scrubbing -->
   <section id="hero" class="scroll-bound">
     <div class="sticky-container">
-      <!-- O vídeo é controlado via JS e fica mudo para reprodução automática sem barreiras de browser -->
       <video id="hero-video" class="scrub-video" playsinline muted preload="auto">
         <source src="lmcc-luz.mp4" type="video/mp4">
         Seu navegador não suporta a tag de vídeo.
       </video>
       <div class="video-overlay hero-overlay">
         <div class="hero-content">
-          <p class="hero-label fade-up">PAPATUNES & LMC APRESENTAM</p>
+          <p class="hero-label fade-up">PAPATUNES APRESENTA</p>
           <h1 class="hero-title fade-up">LEZIN</h1>
-          <p class="hero-subtitle fade-up">Role para baixo para interagir com o fluxo</p>
+          <p class="hero-subtitle fade-up">Controle o ritmo no scroll da página</p>
         </div>
         <div class="scroll-indicator">
           <div class="mouse-icon">
             <span class="mouse-wheel"></span>
           </div>
-          <span class="scroll-text">SCROLL</span>
+          <span class="scroll-text">ROLAR</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SEÇÃO SOBRE: Biografia e Transição -->
+  <!-- SEÇÃO SOBRE: Biografia -->
   <section id="sobre" class="section-sobre">
     <div class="glow-sphere gold-glow"></div>
     <div class="container">
@@ -82,22 +93,88 @@
           </p>
           <div class="social-mini-links">
             <a href="https://www.instagram.com/lezinlmc" target="_blank" class="mini-link-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               <span>@lezinlmc</span>
             </a>
             <a href="https://www.youtube.com/@lezinlmc" target="_blank" class="mini-link-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-youtube"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
               <span>YouTube Oficial</span>
             </a>
           </div>
         </div>
         <div class="sobre-image-card">
           <div class="image-wrapper">
-            <img src="lezin-pray.jpg" alt="Lezin rezando - Papatunes" class="sobre-img shadow-glow">
+            <img src="lezin-pray.jpg" alt="Lezin - Foco e Fé" class="sobre-img shadow-glow">
             <div class="image-border-decoration"></div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO DOBRA B: Discografia, Composições e Spotify (Fundo Preto) -->
+  <section id="music" class="py-32 bg-dark border-t border-white/5">
+    <div class="container">
+      <!-- Cabeçalho de Discografia -->
+      <div class="music-header-container">
+        <div>
+          <h2 class="music-section-title">Discografia <span class="accent-title">Completa</span></h2>
+          <p class="section-subtext">Álbuns, Singles e Feats / LMC & Papatunes</p>
+        </div>
+        <div class="filter-wrapper">
+          <button onclick="filterDiscography('Tudo')" class="filter-btn active">Tudo</button>
+          <button onclick="filterDiscography('Álbum')" class="filter-btn">Álbuns</button>
+          <button onclick="filterDiscography('Single')" class="filter-btn">Singles</button>
+          <button onclick="filterDiscography('Feat')" class="filter-btn">Feats</button>
+          <a href="#composicoes" class="filter-btn border-gold-btn">Composições</a>
+        </div>
+      </div>
+
+      <!-- Grid de Álbuns / Singles -->
+      <div id="discography-grid" class="discography-grid">
+        <!-- Injetado via JS -->
+      </div>
+
+      <!-- Spotify Player Embed -->
+      <div class="spotify-embed-container glass-card">
+        <iframe style="border-radius:16px" src="https://open.spotify.com/embed/artist/2JcdqbrYd99HWzPaBRCSfp?utm_source=generator&theme=0" width="100%" height="200" frameBorder="0" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+      <!-- COMPOSIÇÕES SECTION (Sub-seção) -->
+      <div id="composicoes" class="composicoes-container">
+        <div class="composicoes-header">
+          <p class="gold-subtitle">Letrista & Compositor</p>
+          <h3 class="composicoes-title">Composições <span class="gold-accent-text">Assinadas</span></h3>
+          <p class="composicoes-desc">Músicas compostas por Lezin em parcerias e feats no cenário. O talento lírico em evidência.</p>
+        </div>
+        
+        <div id="compositions-grid" class="compositions-grid">
+          <!-- Injetado via JS -->
+        </div>
+
+        <p class="exclusive-pitch">Interessado em composições exclusivas? <a href="#contact" class="gold-link">Fale pelo Hub de Negócios →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE TAPE: Marquee de Streaming -->
+  <section class="streaming-marquee">
+    <div class="marquee-content">
+      <span>■ Spotify</span>
+      <span>■ YouTube</span>
+      <span>■ Instagram</span>
+      <span>■ Apple Music</span>
+      <span>■ Deezer</span>
+      <span>■ Papatunes</span>
+      <span>■ LMC</span>
+      <!-- Repetição para Loop Infinito -->
+      <span>■ Spotify</span>
+      <span>■ YouTube</span>
+      <span>■ Instagram</span>
+      <span>■ Apple Music</span>
+      <span>■ Deezer</span>
+      <span>■ Papatunes</span>
+      <span>■ LMC</span>
     </div>
   </section>
 
@@ -111,136 +188,132 @@
       <div class="video-overlay dobra-c-overlay">
         <div class="dobra-c-content container">
           <div class="text-glass-panel">
-            <span class="badge badge-accent">DOBRA C</span>
+            <span class="badge badge-accent">PROJETO ESPECIAL</span>
             <h2 class="dobra-c-title">MUITO MAIS QUE MÚSICA</h2>
-            <p class="dobra-c-desc">Estilo de vida, lírica impecável e produção cirúrgica. Sinta cada detalhe do beat e da imagem frame a frame.</p>
+            <p class="dobra-c-desc">Vivência, métrica afiada e direção audiovisual de ponta. Sinta cada corte de cena e batida frame por frame.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SEÇÃO GALERIA: Imagens em Grid Moderno -->
-  <section id="galeria" class="section-galeria">
-    <div class="glow-sphere purple-glow"></div>
+  <!-- SEÇÃO DOBRA D: Hub Visual (Vídeos do YouTube) -->
+  <section id="videos" class="py-32 bg-dark px-6 border-t border-white/5">
     <div class="container">
-      <div class="section-header text-center">
-        <span class="badge">VISUAL</span>
-        <h2 class="section-title">Galeria de Fotos</h2>
-        <p class="section-subtitle">Retratos exclusivos de Lezin em sessões de estúdio e sets de gravação.</p>
-      </div>
+      <h2 class="video-section-title">Hub <span class="red-accent-text">Visual</span></h2>
+      <p class="video-section-subtitle">Assista aos clipes oficiais de Lezin. Clique nos itens da lista para reproduzir.</p>
+      
+      <div class="video-hub-grid">
+        <!-- Player Esquerda -->
+        <div class="main-player-wrapper">
+          <div class="aspect-video-container" id="main-video-container">
+            <!-- Poster do vídeo antes do clique -->
+            <div id="main-video-poster" class="video-poster" onclick="playMainVideo()">
+              <img id="main-video-thumb" src="" alt="Video Preview" class="poster-img">
+              <div class="poster-play-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <iframe id="main-video-frame" class="video-iframe hidden" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+          </div>
+        </div>
 
-      <div class="gallery-grid">
-        <!-- Foto 1 (Pray) -->
-        <div class="gallery-item glass-card card-tilt" data-image="lezin-pray.jpg">
-          <div class="gallery-img-container">
-            <img src="lezin-pray.jpg" alt="Lezin - Foco e Fé" class="gallery-img">
-            <div class="gallery-hover-overlay">
-              <span class="gallery-item-title">Foco & Fé</span>
-              <span class="gallery-item-category">Estúdio</span>
-            </div>
-          </div>
-        </div>
-        <!-- Foto 2 (Corrente) -->
-        <div class="gallery-item glass-card card-tilt" data-image="lezin-corrente.jpg">
-          <div class="gallery-img-container">
-            <img src="lezin-corrente.jpg" alt="Lezin - Detalhes" class="gallery-img">
-            <div class="gallery-hover-overlay">
-              <span class="gallery-item-title">Linhas de Ouro</span>
-              <span class="gallery-item-category">Detalhe</span>
-            </div>
-          </div>
-        </div>
-        <!-- Foto 3 (Dpe) -->
-        <div class="gallery-item glass-card card-tilt" data-image="lezin-dpe.jpg">
-          <div class="gallery-img-container">
-            <img src="lezin-dpe.jpg" alt="Lezin - Retrato" class="gallery-img">
-            <div class="gallery-hover-overlay">
-              <span class="gallery-item-title">Atitude</span>
-              <span class="gallery-item-category">Retrato</span>
-            </div>
-          </div>
-        </div>
-        <!-- Foto 4 (Blur) -->
-        <div class="gallery-item glass-card card-tilt" data-image="lezin-blur.jpg">
-          <div class="gallery-img-container">
-            <img src="lezin-blur.jpg" alt="Lezin - Movimento" class="gallery-img">
-            <div class="gallery-hover-overlay">
-              <span class="gallery-item-title">Estética Noturna</span>
-              <span class="gallery-item-category">Motion</span>
-            </div>
-          </div>
+        <!-- Lista Direita -->
+        <div class="video-playlist" id="video-playlist">
+          <!-- Injetado via JS -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SEÇÃO STREAMING: Links para as Plataformas -->
-  <section id="streaming" class="section-streaming">
-    <div class="container">
-      <div class="section-header text-center">
-        <span class="badge">CONEXÃO</span>
-        <h2 class="section-title">Ouça Lezin nas Plataformas</h2>
-        <p class="section-subtitle">Escolha o seu serviço de streaming favorito e adicione o som do trap à sua playlist.</p>
+  <!-- SEÇÃO DOBRA E: Hub de Negócios / Contato (Fundo lezin-dpe.jpg com Parallax) -->
+  <section id="contact" class="section-contact">
+    <div class="contact-parallax-bg"></div>
+    <div class="contact-overlay"></div>
+    
+    <div class="container contact-container">
+      <div class="contact-info">
+        <h2 class="contact-title">HUB DE <br> <span class="accent-title">NEGÓCIOS</span></h2>
+        <p class="contact-desc">Agenciamento de shows, parcerias de publicidade e colaborações artísticas exclusivas.</p>
+        
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+            </div>
+            <div>
+              <h3>Show & Performance</h3>
+              <p>Agenda aberta para festivais, eventos corporativos e clubes no Brasil.</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+            </div>
+            <div>
+              <h3>Colab & Feat</h3>
+              <p>Parcerias musicais, composições dedicadas e beats exclusivos.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="streaming-grid">
-        <!-- Spotify Card -->
-        <a href="https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg" target="_blank" class="streaming-card glass-card spotify-hover">
-          <div class="card-glow-bg"></div>
-          <div class="streaming-icon-container">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" class="icon-spotify">
-              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.817 1.127.294.18.387.563.207.861zm1.226-2.723c-.226.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.076-1.183-.412.125-.845-.107-.97-.52-.125-.412.107-.845.52-.97 3.666-1.112 8.246-.575 11.34 1.327.367.227.488.708.26 1.086zm.106-2.833C14.492 8.78 8.72 8.59 5.38 9.602c-.515.156-1.05-.133-1.206-.648-.156-.514.133-1.05.648-1.206 3.83-1.162 10.202-.943 14.164 1.41.463.275.614.873.34 1.336-.275.463-.873.614-1.336.34z"/>
-            </svg>
-          </div>
-          <h3>Spotify</h3>
-          <p>Siga o artista e confira os últimos lançamentos</p>
-          <span class="action-btn">Ouvir no Spotify</span>
-        </a>
-
-        <!-- YouTube Card -->
-        <a href="https://www.youtube.com/@lezinlmc" target="_blank" class="streaming-card glass-card youtube-hover">
-          <div class="card-glow-bg"></div>
-          <div class="streaming-icon-container">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" class="icon-youtube">
-              <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.872.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-            </svg>
-          </div>
-          <h3>YouTube</h3>
-          <p>Assista aos videoclipes oficiais e lives</p>
-          <span class="action-btn">Inscrever-se</span>
-        </a>
-
-        <!-- Instagram Card -->
-        <a href="https://www.instagram.com/lezinlmc" target="_blank" class="streaming-card glass-card instagram-hover">
-          <div class="card-glow-bg"></div>
-          <div class="streaming-icon-container">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-instagram">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-          </div>
-          <h3>Instagram</h3>
-          <p>Acompanhe o dia a dia e novidades do estúdio</p>
-          <span class="action-btn">Seguir no Instagram</span>
-        </a>
-      </div>
+      <!-- Formulário de Negócios -->
+      <form class="contact-form glass-card" onsubmit="event.preventDefault(); alert('Proposta enviada com sucesso! Entraremos em contato via WhatsApp.');">
+        <div class="form-group">
+          <label class="form-label">Modalidade de Contrato</label>
+          <select class="form-select">
+            <option>CONTRATAR SHOWS</option>
+            <option>FEAT / COLABORAÇÃO</option>
+            <option>PUBLICIDADE & MARCAS</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="NOME OU PRODUTORA" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <input type="tel" placeholder="WHATSAPP DE CONTATO" class="form-input" required>
+        </div>
+        <button type="submit" class="form-submit-btn">Enviar Proposta</button>
+      </form>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER: Fundo lezin-blur.jpg -->
   <footer class="footer">
-    <div class="container footer-content">
-      <div class="footer-brand">
-        <img src="logo-papatunes.gif" alt="Papatunes Logo" class="footer-logo">
-        <p class="footer-text">PAPATUNES MUSIC & LMC © 2026. Todos os direitos reservados.</p>
+    <div class="footer-parallax-bg"></div>
+    <div class="footer-overlay"></div>
+    <div class="container footer-container">
+      <h2 class="footer-giant-logo">LEZIN</h2>
+      <div class="footer-socials">
+        <a href="https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg" target="_blank">Spotify</a>
+        <a href="https://www.youtube.com/@lezinlmc" target="_blank">YouTube</a>
+        <a href="https://www.instagram.com/lezinlmc" target="_blank">Instagram</a>
       </div>
-      <div class="footer-credits">
-        Desenvolvido com estética premium & interações de ponta.
-      </div>
+      <p class="footer-legal">LEZIN OFFICIAL HUB · PAPATUNES MUSIC & LMC © 2026. Todos os direitos reservados.</p>
     </div>
   </footer>
+
+  <!-- SMART LINK MODAL (Pop-up de Streaming ao clicar nos cards) -->
+  <div id="smart-link-modal" class="smart-link-modal hidden">
+    <div class="modal-backdrop" onclick="closeSmartLinkModal()"></div>
+    <div class="modal-card glass-card">
+      <button onclick="closeSmartLinkModal()" class="modal-close-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="modal-header">
+        <div class="modal-cover-wrapper">
+          <img id="modal-cover" src="" alt="Album Cover">
+        </div>
+        <h3 id="modal-title" class="modal-title-text">-</h3>
+        <p id="modal-subtitle" class="modal-subtitle-text">-</p>
+      </div>
+      <div class="modal-links-grid" id="modal-links-grid">
+        <!-- Injetado por JS -->
+      </div>
+      <p class="modal-footer-tag">ESCOLHA ONDE OUVIR</p>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script type="module" src="app.js"></script>

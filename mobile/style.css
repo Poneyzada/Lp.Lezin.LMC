@@ -1,0 +1,1076 @@
+/* ==========================================
+   ESTILOS MOBILE - DESIGN SISTEMA E AJUSTES
+   ========================================== */
+
+:root {
+  /* Cores Principais */
+  --bg-primary: #020202;
+  --bg-secondary: #08080a;
+  --bg-card: rgba(18, 18, 22, 0.75);
+  
+  /* Acentos */
+  --accent-gold: #e5a93b;
+  --accent-gold-rgb: 229, 169, 59;
+  --accent-red: #c0392b;
+  
+  /* Redes/Plataformas */
+  --color-spotify: #1db954;
+  --color-youtube: #ff0000;
+  --color-apple: #fc3c44;
+  --color-deezer: #ff007f;
+  
+  /* Fontes */
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  --font-drama: 'Playfair Display', serif;
+  
+  /* Efeitos */
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+  --glass-blur: blur(15px);
+  --transition-smooth: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  --transition-fast: all 0.2s ease;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; /* Remove borda azul ao tocar no mobile */
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: #ffffff;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  background: var(--bg-primary);
+}
+
+/* ==========================================
+   LOADER
+   ========================================== */
+
+.loader-container {
+  position: fixed;
+  inset: 0;
+  background-color: #020202;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
+
+.loader-container.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-content {
+  text-align: center;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loader-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 20px;
+  animation: logoPulse 2s infinite ease-in-out;
+}
+
+.loader-text {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 15px;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: var(--accent-gold);
+  box-shadow: 0 0 8px var(--accent-gold);
+  border-radius: 10px;
+}
+
+.loader-subtext {
+  font-size: 0.75rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@keyframes logoPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+/* ==========================================
+   NAVBAR (Otimizada para Mobile)
+   ========================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.nav-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo {
+  height: 32px;
+  width: auto;
+  border-radius: 3px;
+}
+
+.nav-brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+}
+
+.btn-connect {
+  background: linear-gradient(135deg, var(--accent-gold), #b87c1c);
+  color: #000;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+/* ==========================================
+   SCROLL VIDEO (Optimizado para Touch Screen)
+   ========================================== */
+
+.scroll-bound {
+  position: relative;
+  height: 200vh; /* Scroll mais curto para evitar cansaço no mobile */
+  width: 100%;
+}
+
+.sticky-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.scrub-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5) contrast(1.05);
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  background: rgba(0,0,0,0.45);
+}
+
+.hero-content {
+  text-align: center;
+  padding: 0 15px;
+}
+
+.hero-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--accent-gold);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 4.8rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1px #ffffff;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.6;
+}
+
+.mouse-icon {
+  width: 16px;
+  height: 28px;
+  border: 1.5px solid #ffffff;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+.mouse-wheel {
+  width: 3px;
+  height: 5px;
+  background-color: var(--accent-gold);
+  border-radius: 1px;
+  animation: wheelScrollMobile 1.5s infinite ease-in-out;
+}
+
+@keyframes wheelScrollMobile {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(8px); opacity: 0; }
+}
+
+/* ==========================================
+   GLASSMOPHISM E ESTRUTURA
+   ========================================== */
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: var(--glass-shadow);
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--accent-gold);
+  border: 1px solid rgba(229, 169, 59, 0.25);
+  background: rgba(229, 169, 59, 0.05);
+  padding: 4px 10px;
+  border-radius: 50px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.container {
+  width: 100%;
+  padding: 0 5%;
+}
+
+/* ==========================================
+   SEÇÃO SOBRE (Biografia Stacked)
+   ========================================== */
+
+.section-sobre {
+  padding: 60px 0;
+  background-color: var(--bg-secondary);
+}
+
+.sobre-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.sobre-image-card {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.image-wrapper {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.8);
+}
+
+.sobre-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  line-height: 1.1;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+.paragraph {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.social-mini-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.mini-link-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* ==========================================
+   SEÇÃO DOBRA B: DISCOGRAFIA (Mobile 2 Colunas)
+   ========================================== */
+
+.music-header-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.music-section-title {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.music-section-title .accent-title {
+  font-family: var(--font-drama);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent-gold);
+  text-transform: capitalize;
+}
+
+.filter-wrapper {
+  display: flex;
+  gap: 8px;
+  padding: 4px;
+  background: rgba(255,255,255,0.01);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  overflow-x: auto;
+  scrollbar-width: none; /* Oculta scrollbar */
+}
+
+.filter-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.filter-btn.active {
+  background-color: var(--accent-gold);
+  color: #000;
+}
+
+/* Grid de Discografia */
+.discography-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.disc-card {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+
+.disc-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.disc-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 15px;
+}
+
+.disc-card-tag {
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+.disc-card-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #fff;
+  margin-top: 3px;
+}
+
+/* Spotify */
+.spotify-embed-container {
+  margin-top: 40px;
+  border-radius: 16px;
+}
+
+/* COMPOSIÇÕES MOBILE */
+.composicoes-container {
+  margin-top: 60px;
+  border-top: 1px solid var(--glass-border);
+  padding-top: 50px;
+}
+
+.composicoes-header {
+  margin-bottom: 25px;
+}
+
+.gold-subtitle {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent-gold);
+}
+
+.composicoes-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.composicoes-title .gold-accent-text {
+  font-family: var(--font-drama);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent-gold);
+}
+
+.compositions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.comp-card {
+  background: rgba(255,255,255,0.01);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.comp-card-img-wrapper {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+
+.comp-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.comp-card-info {
+  margin-top: 8px;
+}
+
+.comp-card-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.comp-card-artist {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.exclusive-pitch {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.3);
+  margin-top: 30px;
+  text-align: center;
+}
+
+.gold-link {
+  color: var(--accent-gold);
+  text-decoration: none;
+}
+
+/* ==========================================
+   MARQUEE TAPE
+   ========================================== */
+
+.streaming-marquee {
+  border-y: 1px solid var(--glass-border);
+  padding: 20px 0;
+  overflow: hidden;
+  display: flex;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 40px;
+  white-space: nowrap;
+  animation: marqueeLoop 25s linear infinite;
+}
+
+.marquee-content span {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes marqueeLoop {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ==========================================
+   SEÇÃO DOBRA C
+   ========================================== */
+
+.dobra-c-overlay {
+  justify-content: center;
+  padding: 0 15px;
+}
+
+.text-glass-panel {
+  background: rgba(4, 4, 5, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 25px;
+  width: 100%;
+  max-width: 450px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: var(--transition-smooth);
+}
+
+.text-glass-panel.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dobra-c-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.dobra-c-desc {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.65);
+}
+
+/* ==========================================
+   SEÇÃO DOBRA D: HUB VISUAL (Stacked)
+   ========================================== */
+
+.video-section-title {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.video-section-title .red-accent-text {
+  font-family: var(--font-drama);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent-red);
+}
+
+.video-section-subtitle {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+.video-hub-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.main-player-wrapper {
+  background: rgba(255,255,255,0.01);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 6px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.aspect-video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-poster {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.poster-play-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.poster-play-btn svg {
+  color: #fff;
+  fill: #fff;
+  margin-left: 2px;
+}
+
+.video-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-playlist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.playlist-item {
+  display: flex;
+  gap: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 8px;
+  align-items: center;
+}
+
+.playlist-item.active {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(192,57,43,0.3);
+}
+
+.playlist-item-thumb-wrapper {
+  width: 80px;
+  aspect-ratio: 16/10;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.playlist-item-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.playlist-item-play-overlay {
+  display: none;
+}
+
+.playlist-item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.playlist-item-tag {
+  font-size: 0.55rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--accent-red);
+}
+
+.playlist-item-title {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ==========================================
+   SEÇÃO DOBRA E: HUB DE NEGÓCIOS
+   ========================================== */
+
+.section-contact {
+  position: relative;
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.contact-parallax-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../lezin-dpe.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.18) contrast(1.1);
+  z-index: 1;
+}
+
+.contact-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 30%, rgba(2, 2, 2, 0.95) 100%);
+  z-index: 2;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  z-index: 5;
+  position: relative;
+}
+
+.contact-title {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 0.9;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.contact-title .accent-title {
+  font-family: var(--font-drama);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent-gold);
+}
+
+.contact-form {
+  border-radius: 24px;
+  padding: 25px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-left: 5px;
+}
+
+.form-select, .form-input {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  outline: none;
+}
+
+.form-submit-btn {
+  background-color: var(--accent-gold);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 10px;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.footer {
+  position: relative;
+  padding: 60px 0 30px;
+  overflow: hidden;
+  border-top: 1px solid var(--glass-border);
+}
+
+.footer-parallax-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../lezin-blur.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.12) contrast(1.1);
+  z-index: 1;
+}
+
+.footer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(2,2,2,0.92);
+  z-index: 2;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+  position: relative;
+}
+
+.footer-giant-logo {
+  font-family: var(--font-display);
+  font-size: 18vw;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.02);
+  margin-bottom: 25px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.footer-socials a {
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.footer-legal {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+/* ==========================================
+   SMART LINK MODAL
+   ========================================== */
+
+.smart-link-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.smart-link-modal.hidden {
+  display: none !important;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 2, 2, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 320px;
+  background: rgba(10, 10, 12, 0.9);
+  border-radius: 24px;
+  padding: 25px;
+  z-index: 10;
+  text-align: center;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.modal-header {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-cover-wrapper {
+  width: 100px;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+  margin-bottom: 12px;
+}
+
+.modal-cover-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-title-text {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.modal-subtitle-text {
+  font-size: 0.75rem;
+  color: var(--accent-gold);
+  margin-top: 3px;
+}
+
+.modal-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.modal-link-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 12px 18px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.modal-link-row svg {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.modal-link-row.spotify:active { color: var(--color-spotify); border-color: var(--color-spotify); }
+.modal-link-row.youtube:active { color: var(--color-youtube); border-color: var(--color-youtube); }
+
+.modal-footer-tag {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 20px;
+}

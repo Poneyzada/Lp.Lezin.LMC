@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Lezin - Papatunes & LMC (Versão Mobile). Conheça a discografia e interaja no scroll frame a frame.">
+  <title>Lezin | Oficial Mobile</title>
+  
+  <script>
+    if (!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) && window.innerWidth >= 768) {
+      window.location.href = '../';
+    }
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        window.location.href = '../';
+      }
+    });
+  </script>
+
+  <!-- Fontes do Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased text-white bg-dark">
+
+  <!-- Loader da Página Mobile -->
+  <div id="loader" class="loader-container">
+    <div class="loader-content">
+      <img src="../logo-papatunes.gif" alt="Papatunes Logo" class="loader-logo">
+      <h2 class="loader-text">LEZIN MOBILE</h2>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <p class="loader-subtext" id="loader-status">Carregando...</p>
+    </div>
+  </div>
+
+  <!-- Header / Navbar Mobile -->
+  <header class="navbar">
+    <div class="nav-logo-container">
+      <img src="../logo-papatunes.gif" alt="Papatunes Logo" class="nav-logo">
+      <span class="nav-brand">LEZIN</span>
+    </div>
+    <a href="#contact" class="btn-connect">Shows</a>
+  </header>
+
+  <!-- SEÇÃO HERO: Vídeo 1 (Scrubbing otimizado para mobile) -->
+  <section id="hero" class="scroll-bound">
+    <div class="sticky-container">
+      <video id="hero-video" class="scrub-video" playsinline muted preload="auto">
+        <source src="../lmcc-luz.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay hero-overlay">
+        <div class="hero-content">
+          <p class="hero-label">PAPATUNES APRESENTA</p>
+          <h1 class="hero-title">LEZIN</h1>
+          <p class="hero-subtitle">Deslize para interagir com o clipe</p>
+        </div>
+        <div class="scroll-indicator">
+          <div class="mouse-icon">
+            <span class="mouse-wheel"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO SOBRE -->
+  <section id="sobre" class="section-sobre">
+    <div class="container">
+      <div class="sobre-grid">
+        <div class="sobre-image-card">
+          <div class="image-wrapper">
+            <img src="../lezin-pray.jpg" alt="Lezin" class="sobre-img shadow-glow">
+          </div>
+        </div>
+        <div class="sobre-text-card glass-card">
+          <span class="badge">BIOGRAFIA</span>
+          <h2 class="section-title">A Nova Voz das Ruas</h2>
+          <p class="paragraph">
+            Diretamente sob o selo da **Papatunes**, gravadora liderada pelo lendário produtor Papatinho, **Lezin** surge como uma das vozes mais autênticas do cenário atual do Trap nacional. Em parceria com a **LMC**, o projeto consolida uma nova era de produções audiovisuais sofisticadas.
+          </p>
+          <div class="social-mini-links">
+            <a href="https://www.instagram.com/lezinlmc" target="_blank" class="mini-link-btn">
+              <span>Instagram</span>
+            </a>
+            <a href="https://www.youtube.com/@lezinlmc" target="_blank" class="mini-link-btn">
+              <span>YouTube</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO DOBRA B: Discografia, Composições (Fundo Preto - Mobile) -->
+  <section id="music" class="py-20 bg-dark border-t border-white/5">
+    <div class="container">
+      <div class="music-header-container">
+        <h2 class="music-section-title">Discografia <span class="accent-title">Completa</span></h2>
+        <div class="filter-wrapper">
+          <button onclick="filterDiscography('Tudo')" class="filter-btn active">Tudo</button>
+          <button onclick="filterDiscography('Álbum')" class="filter-btn">Álbuns</button>
+          <button onclick="filterDiscography('Single')" class="filter-btn">Singles</button>
+          <button onclick="filterDiscography('Feat')" class="filter-btn">Feats</button>
+        </div>
+      </div>
+
+      <!-- Grid de Álbuns / Singles (Mobile 2 colunas ou 1 coluna) -->
+      <div id="discography-grid" class="discography-grid">
+        <!-- Injetado via JS -->
+      </div>
+
+      <!-- Spotify Player Embed (Otimizado Mobile) -->
+      <div class="spotify-embed-container glass-card">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/2JcdqbrYd99HWzPaBRCSfp?utm_source=generator&theme=0" width="100%" height="200" frameBorder="0" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+      <!-- COMPOSIÇÕES SECTION -->
+      <div id="composicoes" class="composicoes-container">
+        <div class="composicoes-header">
+          <p class="gold-subtitle">Letrista & Compositor</p>
+          <h3 class="composicoes-title">Composições <span class="gold-accent-text">Assinadas</span></h3>
+        </div>
+        
+        <div id="compositions-grid" class="compositions-grid">
+          <!-- Injetado via JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE TAPE -->
+  <section class="streaming-marquee">
+    <div class="marquee-content">
+      <span>■ Spotify</span>
+      <span>■ YouTube</span>
+      <span>■ Instagram</span>
+      <span>■ Apple Music</span>
+      <span>■ Deezer</span>
+    </div>
+  </section>
+
+  <!-- SEÇÃO DOBRA C: Vídeo 2 com Scroll Scrubbing -->
+  <section id="dobra-c" class="scroll-bound">
+    <div class="sticky-container">
+      <video id="dobra-c-video" class="scrub-video" playsinline muted preload="auto">
+        <source src="../Lmcmelhor-venda.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay dobra-c-overlay">
+        <div class="dobra-c-content container">
+          <div class="text-glass-panel">
+            <span class="badge badge-accent">PROJETO ESPECIAL</span>
+            <h2 class="dobra-c-title">MUITO MAIS QUE MÚSICA</h2>
+            <p class="dobra-c-desc">Direção audiovisual impecável. Controle os takes pelo scroll.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO DOBRA D: Hub Visual (Vídeos do YouTube - Stacked Mobile) -->
+  <section id="videos" class="py-20 bg-dark px-4 border-t border-white/5">
+    <div class="container">
+      <h2 class="video-section-title">Hub <span class="red-accent-text">Visual</span></h2>
+      <p class="video-section-subtitle">Toque nos vídeos para reproduzir no player principal.</p>
+      
+      <div class="video-hub-grid">
+        <!-- Player -->
+        <div class="main-player-wrapper">
+          <div class="aspect-video-container" id="main-video-container">
+            <div id="main-video-poster" class="video-poster" onclick="playMainVideo()">
+              <img id="main-video-thumb" src="" alt="Video Preview" class="poster-img">
+              <div class="poster-play-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <iframe id="main-video-frame" class="video-iframe hidden" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+          </div>
+        </div>
+
+        <!-- Lista -->
+        <div class="video-playlist" id="video-playlist">
+          <!-- Injetado via JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO DOBRA E: Hub de Negócios / Contato (Mobile) -->
+  <section id="contact" class="section-contact">
+    <div class="contact-parallax-bg"></div>
+    <div class="contact-overlay"></div>
+    
+    <div class="container contact-container">
+      <div class="contact-info">
+        <h2 class="contact-title">HUB DE <br> <span class="accent-title">NEGÓCIOS</span></h2>
+      </div>
+
+      <!-- Formulário de Negócios -->
+      <form class="contact-form glass-card" onsubmit="event.preventDefault(); alert('Proposta enviada!');">
+        <div class="form-group">
+          <label class="form-label">Modalidade</label>
+          <select class="form-select">
+            <option>CONTRATAR SHOWS</option>
+            <option>FEAT / COLABORAÇÃO</option>
+            <option>PUBLICIDADE & MARCAS</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="SEU NOME" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <input type="tel" placeholder="SEU WHATSAPP" class="form-input" required>
+        </div>
+        <button type="submit" class="form-submit-btn">Enviar Proposta</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-parallax-bg"></div>
+    <div class="footer-overlay"></div>
+    <div class="container footer-container">
+      <h2 class="footer-giant-logo">LEZIN</h2>
+      <div class="footer-socials">
+        <a href="https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg" target="_blank">Spotify</a>
+        <a href="https://www.youtube.com/@lezinlmc" target="_blank">YouTube</a>
+        <a href="https://www.instagram.com/lezinlmc" target="_blank">Instagram</a>
+      </div>
+      <p class="footer-legal">LEZIN OFFICIAL HUB · 2026</p>
+    </div>
+  </footer>
+
+  <!-- SMART LINK MODAL -->
+  <div id="smart-link-modal" class="smart-link-modal hidden">
+    <div class="modal-backdrop" onclick="closeSmartLinkModal()"></div>
+    <div class="modal-card glass-card">
+      <button onclick="closeSmartLinkModal()" class="modal-close-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="modal-header">
+        <div class="modal-cover-wrapper">
+          <img id="modal-cover" src="" alt="Album Cover">
+        </div>
+        <h3 id="modal-title" class="modal-title-text">-</h3>
+        <p id="modal-subtitle" class="modal-subtitle-text">-</p>
+      </div>
+      <div class="modal-links-grid" id="modal-links-grid">
+        <!-- Injetado por JS -->
+      </div>
+      <p class="modal-footer-tag">ESCOLHA ONDE OUVIR</p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>

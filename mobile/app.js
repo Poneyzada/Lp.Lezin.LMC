@@ -1,14 +1,11 @@
 /* ==========================================================================
-   LEZIN LANDING PAGE - COMPORTAMENTOS INTERATIVOS & SCROLL VIDEO SCRUBBING
+   LEZIN LANDING PAGE - INTERAÇÕES MOBILE E SCROLL VIDEO SCRUBBING
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Elementos do DOM
   const loader = document.getElementById('loader');
   const progressBar = document.getElementById('progress-bar');
   const loaderStatus = document.getElementById('loader-status');
-  const navbar = document.querySelector('.navbar');
-  const navLinks = document.querySelectorAll('.nav-link');
   const dobraCPanel = document.querySelector('.text-glass-panel');
 
   // Configuração dos Vídeos com Scroll Scrubbing
@@ -35,21 +32,20 @@ document.addEventListener('DOMContentLoaded', () => {
   function checkAllAssetsLoaded() {
     loadedVideosCount++;
     const progress = Math.min((loadedVideosCount / videoScrubbers.length) * 100, 100);
-    progressBar.style.width = `${progress}%`;
-    loaderStatus.textContent = `Carregado: Vídeo ${loadedVideosCount} de ${videoScrubbers.length}`;
+    if (progressBar) progressBar.style.width = `${progress}%`;
+    if (loaderStatus) loaderStatus.textContent = `Carregado: ${loadedVideosCount}/${videoScrubbers.length}`;
 
     if (loadedVideosCount >= videoScrubbers.length) {
       setTimeout(() => {
-        loader.classList.add('loaded');
-      }, 600);
+        if (loader) loader.classList.add('loaded');
+      }, 500);
     }
   }
 
-  // Monitorar carregamento dos metadados de cada vídeo
   videoScrubbers.forEach(scrubber => {
     const v = scrubber.video;
+    if (!v) return;
 
-    // Se já estiver pronto
     if (v.readyState >= 1) {
       scrubber.loaded = true;
       checkAllAssetsLoaded();
@@ -60,29 +56,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Fallback caso o browser bloqueie ou demore muito
     v.addEventListener('error', () => {
-      console.warn('Erro ao carregar vídeo, continuando fluxo de carregamento...');
-      scrubber.loaded = true; // Força para não travar a tela de loader
+      scrubber.loaded = true;
       checkAllAssetsLoaded();
     });
   });
 
-  // Fallback geral de carregamento da página inteira (após 5s, se travar por codec de vídeo)
   window.addEventListener('load', () => {
-    progressBar.style.width = '100%';
-    loaderStatus.textContent = 'Carregamento finalizado';
+    if (progressBar) progressBar.style.width = '100%';
     setTimeout(() => {
-      if (!loader.classList.contains('loaded')) {
+      if (loader && !loader.classList.contains('loaded')) {
         loader.classList.add('loaded');
       }
-    }, 400);
+    }, 300);
   });
 
 
-  // 2. LOGICA DE SCROLL-DRIVEN VIDEO SCRUBBING (INTERPOLADA/SUAVE)
-  
-  // Função para verificar se elemento está na tela
+  // 2. LOGICA DE SCROLL-DRIVEN VIDEO SCRUBBING (SUAVE MOBILE)
   function isElementInViewport(el) {
     const rect = el.getBoundingClientRect();
     return (
@@ -91,13 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  // Atualiza o tempo de destino baseado no scroll
   function updateVideoTargets() {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
 
     videoScrubbers.forEach(scrubber => {
-      if (!scrubber.loaded) return;
+      if (!scrubber.loaded || !scrubber.video) return;
 
       const sectionRect = scrubber.section.getBoundingClientRect();
       const sectionTop = scrollY + sectionRect.top;
@@ -107,113 +96,62 @@ document.addEventListener('DOMContentLoaded', () => {
       let startScrub, endScrub;
 
       if (scrubber.section.id === 'hero') {
-        // Para a hero, começa do 0 e termina em 75% da rolagem sticky
         startScrub = 0;
         endScrub = stickyRange * 0.75;
       } else {
-        // Para outras seções, começa um pouco antes de fixar (ex: quando o topo está a 20% do fundo da tela)
-        startScrub = sectionTop - windowHeight * 0.2;
-        // E termina quando a rolagem sticky chega a 75%
+        startScrub = sectionTop - windowHeight * 0.25; // Começa um pouco antes no mobile
         endScrub = sectionTop + stickyRange * 0.75;
       }
 
       const range = endScrub - startScrub;
       let progress = (scrollY - startScrub) / range;
-      
-      // Clampar entre 0 e 1
       progress = Math.max(0, Math.min(1, progress));
 
-      // Definir o tempo alvo com base no progresso e duração do vídeo
       if (scrubber.video.duration) {
         scrubber.targetTime = progress * scrubber.video.duration;
       }
     });
   }
 
-  // Loop de Renderização para Suavização (Lerp - Linear Interpolation)
-  // Isto evita travamento do player por causa da taxa de amostragem de scroll do mouse
   function smoothPlayVideoLoop() {
     videoScrubbers.forEach(scrubber => {
-      if (!scrubber.loaded) return;
+      if (!scrubber.loaded || !scrubber.video) return;
 
-      // Se a seção do vídeo estiver visível, atualizamos o frame
       if (isElementInViewport(scrubber.section)) {
-        // Easing Factor: quanto menor, mais suave (ex: 0.08)
-        const easing = 0.08;
-        
-        // Distância entre o tempo atual e o tempo de destino
+        const easing = 0.08; // Valor de easing otimizado para scroll de toque
         const diff = scrubber.targetTime - scrubber.currentTime;
 
-        // Se a diferença for minúscula, iguala diretamente para economizar processamento
         if (Math.abs(diff) < 0.01) {
           scrubber.currentTime = scrubber.targetTime;
         } else {
           scrubber.currentTime += diff * easing;
         }
 
-        // Aplica o tempo suavizado ao vídeo
         try {
           scrubber.video.currentTime = scrubber.currentTime;
-        } catch (e) {
-          // Captura possíveis exceções caso o player esteja temporariamente instável
-        }
+        } catch (e) {}
       }
     });
 
     requestAnimationFrame(smoothPlayVideoLoop);
   }
 
-  // Iniciar loop de renderização suave
   requestAnimationFrame(smoothPlayVideoLoop);
 
-  // Ouvintes de Scroll
   window.addEventListener('scroll', () => {
     updateVideoTargets();
-    handleNavbarScroll();
     animateOnScroll();
   });
 
 
-  // 3. BARRA DE NAVEGAÇÃO & HIGHLIGHTS
-  
-  function handleNavbarScroll() {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  }
-
-  // Destacar o link correspondente à seção atual
+  // 3. ANIMAÇÃO DE FADE-IN NO SCROLL
   function animateOnScroll() {
-    const scrollPosition = window.scrollY + 150; // Offset para ativação antecipada
-
-    // Ativação dos links da navbar
-    const sections = ['hero', 'sobre', 'dobra-c', 'galeria', 'streaming'];
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) {
-        const top = el.offsetTop;
-        const height = el.offsetHeight;
-        if (scrollPosition >= top && scrollPosition < top + height) {
-          navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
-            }
-          });
-        }
-      }
-    });
-
-    // Animar entrada da dobra C (painel de texto glassmorphic)
     const dobraCSection = document.getElementById('dobra-c');
-    if (dobraCSection) {
+    if (dobraCSection && dobraCPanel) {
       const rect = dobraCSection.getBoundingClientRect();
       const viewHeight = window.innerHeight;
       
-      // Se a Dobra C ocupou pelo menos 30% da tela, exibe o painel de texto
-      if (rect.top <= viewHeight * 0.5 && rect.bottom >= viewHeight * 0.3) {
+      if (rect.top <= viewHeight * 0.4 && rect.bottom >= viewHeight * 0.2) {
         dobraCPanel.classList.add('visible');
       } else {
         dobraCPanel.classList.remove('visible');
@@ -222,14 +160,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // 4. CONFIGURAÇÃO DE DADOS (DISCOGRAFIA E CLIPES)
+  // 4. CONFIGURAÇÃO DE DADOS (COM ROTAS RELATIVAS PARA O ROOT)
   const CONFIG = {
     discography: [
       {
         title: "JUDAS",
         type: "Single",
         year: "2024",
-        cover: "lezin-pray.jpg",
+        cover: "../lezin-pray.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=q6tF4Xn25q4",
@@ -241,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "GANA",
         type: "Single",
         year: "2024",
-        cover: "lezin-corrente.jpg",
+        cover: "../lezin-corrente.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=wXQJ5_fM18I",
@@ -253,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "MUSTANG",
         type: "Single",
         year: "2023",
-        cover: "lezin-blur.jpg",
+        cover: "../lezin-blur.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=pWb8X95qU4w",
@@ -264,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "ALICE",
         type: "Single",
         year: "2023",
-        cover: "lezin-dpe.jpg",
+        cover: "../lezin-dpe.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=W79U4U879y0",
@@ -276,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "BERÇO DO TRAP",
         type: "Single",
         year: "2022",
-        cover: "lezin-pray.jpg",
+        cover: "../lezin-pray.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=cM3kZ3J5q5k",
@@ -287,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "O Dono das Ruas",
         type: "Álbum",
         year: "2024",
-        cover: "lezin-dpe.jpg",
+        cover: "../lezin-dpe.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/@lezinlmc",
@@ -300,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         title: "Sereia",
         artist: "Orochi, Ryan SP, Lezin",
-        cover: "lezin-corrente.jpg",
+        cover: "../lezin-corrente.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg"
         }
@@ -308,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         title: "Aura",
         artist: "Azevedo, Lezin",
-        cover: "lezin-blur.jpg",
+        cover: "../lezin-blur.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg"
         }
@@ -383,7 +321,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Controladores de botões de filtro
   window.filterDiscography = function(filter) {
-    // Atualiza botões
     const buttons = document.querySelectorAll('.filter-btn');
     buttons.forEach(btn => {
       if (btn.textContent.trim() === filter || (filter === 'Tudo' && btn.textContent.trim() === 'Tudo')) {
@@ -413,10 +350,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function renderVideos() {
-    // Configura thumbnail do vídeo principal
     const thumb = document.getElementById('main-video-thumb');
     if (thumb) {
-      thumb.src = `https://img.youtube.com/vi/${CONFIG.videos[0].id}/maxresdefault.jpg`;
+      thumb.src = `https://img.youtube.com/vi/${CONFIG.videos[0].id}/hqdefault.jpg`;
     }
 
     const playlist = document.getElementById('video-playlist');
@@ -428,7 +364,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const row = document.createElement('div');
       row.className = `playlist-item ${index === 0 ? 'active' : ''}`;
       row.addEventListener('click', () => {
-        // Remove active de todos
         document.querySelectorAll('.playlist-item').forEach(item => item.classList.remove('active'));
         row.classList.add('active');
 
@@ -439,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (iframe && !iframe.classList.contains('hidden')) {
           iframe.src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
         } else if (thumb) {
-          thumb.src = `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`;
+          thumb.src = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
         }
       });
 
@@ -447,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="playlist-item-thumb-wrapper">
           <img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}" class="playlist-item-thumb">
           <div class="playlist-item-play-overlay">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           </div>
         </div>
         <div class="playlist-item-details">
@@ -483,7 +418,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     platforms.forEach(platform => {
-      // Se o item tiver o link correspondente, ou se for composição e tiver spotify
       if (item.links && item.links[platform.key]) {
         const row = document.createElement('a');
         row.href = item.links[platform.key];
@@ -509,7 +443,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Inicializa visualizações dinâmicas
   renderDiscography();
   renderCompositions();
   renderVideos();
