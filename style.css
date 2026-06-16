@@ -259,13 +259,13 @@ body {
 
 .scroll-bound {
   position: relative;
-  height: 130vh;
+  height: 100vh;
   width: 100%;
   background: radial-gradient(ellipse at center, #0a0a0c 0%, var(--bg-primary) 100%);
 }
 
 .sticky-container {
-  position: sticky;
+  position: relative;
   top: 0;
   height: 100vh;
   width: 100%;
@@ -1607,6 +1607,15 @@ body {
 .py-20 {
   padding-top: 80px !important;
   padding-bottom: 80px !important;
+}
+.pt-0 {
+  padding-top: 0 !important;
+}
+.pb-20 {
+  padding-bottom: 80px !important;
+}
+.pb-32 {
+  padding-bottom: 128px !important;
 }
 .px-6 {
   padding-left: 24px !important;

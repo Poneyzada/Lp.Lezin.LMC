@@ -181,7 +181,7 @@ body {
 
 .scroll-bound {
   position: relative;
-  height: 130vh;
+  height: 100vh;
   width: 100%;
   background: radial-gradient(ellipse at center, #0a0a0c 0%, var(--bg-primary) 100%);
 }
@@ -189,7 +189,7 @@ body {
 /* Sem imagem estática de fundo - o vídeo ou gradiente dark preenche */
 
 .sticky-container {
-  position: sticky;
+  position: relative;
   top: 0;
   height: 100vh;
   width: 100%;
@@ -1083,13 +1083,23 @@ body {
   background-color: var(--bg-primary) !important;
 }
 .py-32 {
-  padding-top: 128px !important;
-  padding-bottom: 128px !important;
+  padding-top: 80px !important;
+  padding-bottom: 80px !important;
 }
+
 .py-20 {
-  padding-top: 40px !important;
-  padding-bottom: 40px !important;
+  padding-top: 50px !important;
+  padding-bottom: 50px !important;
 }
+
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+.pb-32 {
+  padding-bottom: 80px !important;
+}
+
 .px-6 {
   padding-left: 24px !important;
   padding-right: 24px !important;
