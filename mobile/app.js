@@ -137,11 +137,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (scrubber.section.id === 'hero') {
         startScrub = 0;
-        endScrub = stickyRange * 0.80;
+        endScrub = stickyRange;
       } else {
-        // O vídeo começa a tocar ASSIM que a seção entra na parte de baixo da tela
-        startScrub = sectionTop - windowHeight;
-        endScrub = sectionTop + stickyRange * 0.80;
+        // O vídeo começa do zero exatamente quando a dobra trava no topo da tela
+        startScrub = sectionTop;
+        // E termina exatamente quando a dobra destrava (100% suave)
+        endScrub = sectionTop + stickyRange;
       }
 
       const range = endScrub - startScrub;

@@ -146,14 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
       let startScrub, endScrub;
 
       if (scrubber.section.id === 'hero') {
-        // Para a hero, começa do 0 e termina em 80% da rolagem sticky
         startScrub = 0;
-        endScrub = stickyRange * 0.80;
+        endScrub = stickyRange;
       } else {
-        // O vídeo começa a tocar ASSIM que a seção entra na parte de baixo da tela
-        startScrub = sectionTop - windowHeight;
-        // E termina em 80% da rolagem sticky
-        endScrub = sectionTop + stickyRange * 0.80;
+        // O vídeo começa do zero exatamente quando a dobra trava no topo da tela
+        startScrub = sectionTop;
+        // E termina exatamente quando a dobra destrava (100% suave)
+        endScrub = sectionTop + stickyRange;
       }
 
       const range = endScrub - startScrub;
