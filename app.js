@@ -107,14 +107,14 @@ document.addEventListener('DOMContentLoaded', () => {
       let startScrub, endScrub;
 
       if (scrubber.section.id === 'hero') {
-        // Para a hero, começa do 0 e termina em 75% da rolagem sticky
+        // Para a hero, começa do 0 e termina em 85% da rolagem sticky
         startScrub = 0;
-        endScrub = stickyRange * 0.75;
+        endScrub = stickyRange * 0.85;
       } else {
         // Para outras seções, começa um pouco antes de fixar (ex: quando o topo está a 20% do fundo da tela)
         startScrub = sectionTop - windowHeight * 0.2;
-        // E termina quando a rolagem sticky chega a 75%
-        endScrub = sectionTop + stickyRange * 0.75;
+        // E termina quando a rolagem sticky chega a 85%
+        endScrub = sectionTop + stickyRange * 0.85;
       }
 
       const range = endScrub - startScrub;

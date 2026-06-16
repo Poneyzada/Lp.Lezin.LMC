@@ -259,7 +259,7 @@ body {
 
 .scroll-bound {
   position: relative;
-  height: 300vh;
+  height: 180vh; /* Altura do scroll otimizada para evitar rolagem morta */
   width: 100%;
   background: var(--bg-primary);
 }

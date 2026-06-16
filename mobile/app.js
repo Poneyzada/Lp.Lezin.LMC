@@ -97,10 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (scrubber.section.id === 'hero') {
         startScrub = 0;
-        endScrub = stickyRange * 0.75;
+        endScrub = stickyRange * 0.85;
       } else {
         startScrub = sectionTop - windowHeight * 0.25; // Começa um pouco antes no mobile
-        endScrub = sectionTop + stickyRange * 0.75;
+        endScrub = sectionTop + stickyRange * 0.85;
       }
 
       const range = endScrub - startScrub;
