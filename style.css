@@ -259,7 +259,7 @@ body {
 
 .scroll-bound {
   position: relative;
-  height: 220vh; /* Altura ideal de scroll para assistir ao vídeo sem pressa antes da próxima dobra */
+  height: 180vh; /* Altura ideal de scroll para assistir ao vídeo sem pressa antes da próxima dobra */
   width: 100%;
   background: var(--bg-primary);
 }
@@ -1169,7 +1169,7 @@ body {
 .contact-parallax-bg {
   position: absolute;
   inset: 0;
-  background-image: url('lezin-dpe.jpg');
+  background-image: url('/lezin-dpe.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -1356,7 +1356,7 @@ body {
 .footer-parallax-bg {
   position: absolute;
   inset: 0;
-  background-image: url('lezin-blur.jpg');
+  background-image: url('/lezin-blur.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -1595,3 +1595,39 @@ body {
   .compositions-grid { grid-template-columns: 1fr; }
   .form-select, .form-input { padding: 15px 20px; }
 }
+
+/* Spacing and Visual Utilities */
+.bg-dark {
+  background-color: var(--bg-primary) !important;
+}
+.py-32 {
+  padding-top: 128px !important;
+  padding-bottom: 128px !important;
+}
+.py-20 {
+  padding-top: 80px !important;
+  padding-bottom: 80px !important;
+}
+.px-6 {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+.px-4 {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+.border-t {
+  border-top-width: 1px !important;
+  border-top-style: solid !important;
+}
+.border-white\/5 {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.text-white {
+  color: #ffffff !important;
+}
+

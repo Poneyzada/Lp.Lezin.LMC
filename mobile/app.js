@@ -62,10 +62,20 @@ document.addEventListener('DOMContentLoaded', () => {
       clearTimeout(timeoutId);
       if (!scrubber.loaded) {
         scrubber.loaded = true;
-        // Força renderização do primeiro frame no mobile (Safari iOS fix)
-        try {
-          v.currentTime = 0.001;
-        } catch (e) {}
+        
+        // Force pre-play and pause to load buffer and render first frame on mobile
+        v.play().then(() => {
+          v.pause();
+          try {
+            v.currentTime = 0.001;
+          } catch (e) {}
+        }).catch(err => {
+          console.warn("Mobile auto-play blocked or play/pause init failed:", err);
+          try {
+            v.currentTime = 0.001;
+          } catch (e) {}
+        });
+
         checkAllAssetsLoaded();
       }
     };
@@ -119,10 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (scrubber.section.id === 'hero') {
         startScrub = 0;
-        endScrub = stickyRange * 0.70;
+        endScrub = stickyRange * 0.60;
       } else {
-        startScrub = sectionTop - windowHeight * 0.25; // Começa um pouco antes no mobile
-        endScrub = sectionTop + stickyRange * 0.70;
+        startScrub = sectionTop;
+        endScrub = sectionTop + stickyRange * 0.60;
       }
 
       const range = endScrub - startScrub;
@@ -189,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "JUDAS",
         type: "Single",
         year: "2024",
-        cover: "../lezin-pray.jpg",
+        cover: "/lezin-pray.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=q6tF4Xn25q4",
@@ -201,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "GANA",
         type: "Single",
         year: "2024",
-        cover: "../lezin-corrente.jpg",
+        cover: "/lezin-corrente.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=wXQJ5_fM18I",
@@ -213,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "MUSTANG",
         type: "Single",
         year: "2023",
-        cover: "../lezin-blur.jpg",
+        cover: "/lezin-blur.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=pWb8X95qU4w",
@@ -224,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "ALICE",
         type: "Single",
         year: "2023",
-        cover: "../lezin-dpe.jpg",
+        cover: "/lezin-dpe.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=W79U4U879y0",
@@ -236,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "BERÇO DO TRAP",
         type: "Single",
         year: "2022",
-        cover: "../lezin-pray.jpg",
+        cover: "/lezin-pray.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/watch?v=cM3kZ3J5q5k",
@@ -247,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "O Dono das Ruas",
         type: "Álbum",
         year: "2024",
-        cover: "../lezin-dpe.jpg",
+        cover: "/lezin-dpe.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg",
           youtube: "https://www.youtube.com/@lezinlmc",
@@ -260,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         title: "Sereia",
         artist: "Orochi, Ryan SP, Lezin",
-        cover: "../lezin-corrente.jpg",
+        cover: "/lezin-corrente.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg"
         }
@@ -268,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         title: "Aura",
         artist: "Azevedo, Lezin",
-        cover: "../lezin-blur.jpg",
+        cover: "/lezin-blur.jpg",
         links: {
           spotify: "https://open.spotify.com/artist/2JcdqbrYd99HWzPaBRCSfp?si=BgWX8qozQ8e9PHqzZj8geg"
         }
