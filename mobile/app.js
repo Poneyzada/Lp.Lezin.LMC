@@ -156,6 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e) {}
       }
     });
+  } // <--- FECHA updateVideoTargets()
+  
   // Loop removido, atualizando diretamente via listener de scroll
   window.addEventListener('scroll', () => {
     updateVideoTargets();
