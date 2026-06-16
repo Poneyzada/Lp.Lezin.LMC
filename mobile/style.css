@@ -181,7 +181,7 @@ body {
 
 .scroll-bound {
   position: relative;
-  height: 250vh; /* Muito mais espaço para um scrub SUPER suave e lento */
+  height: 150vh; /* Reduzido para aproximar as dobras e diminuir sensação de espaço vazio */
   width: 100%;
   background: var(--bg-primary);
 }

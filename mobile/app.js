@@ -158,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   // Loop removido, atualizando diretamente via listener de scroll
   window.addEventListener('scroll', () => {
+    updateVideoTargets();
     animateOnScroll();
   });
 
