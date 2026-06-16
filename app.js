@@ -163,46 +163,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Definir o tempo alvo com base no progresso e duração do vídeo
       if (scrubber.video.duration) {
-        scrubber.targetTime = progress * scrubber.video.duration;
-      }
-    });
-  }
-
-  // Loop de Renderização para Suavização (Lerp - Linear Interpolation)
-  // Isto evita travamento do player por causa da taxa de amostragem de scroll do mouse
-  function smoothPlayVideoLoop() {
-    videoScrubbers.forEach(scrubber => {
-      if (!scrubber.loaded) return;
-
-      // Se a seção do vídeo estiver visível, atualizamos o frame
-      if (isElementInViewport(scrubber.section)) {
-        // Easing Factor: quanto menor, mais suave (ex: 0.08)
-        const easing = 0.08;
-        
-        // Distância entre o tempo atual e o tempo de destino
-        const diff = scrubber.targetTime - scrubber.currentTime;
-
-        // Se a diferença for minúscula, iguala diretamente para economizar processamento
-        if (Math.abs(diff) < 0.01) {
-          scrubber.currentTime = scrubber.targetTime;
-        } else {
-          scrubber.currentTime += diff * easing;
-        }
-
-        // Aplica o tempo suavizado ao vídeo
         try {
-          scrubber.video.currentTime = scrubber.currentTime;
-        } catch (e) {
-          // Captura possíveis exceções caso o player esteja temporariamente instável
-        }
+          // Atribuição direta sem lerp para ser 100% responsivo e sincronizado com o scroll
+          scrubber.video.currentTime = progress * scrubber.video.duration;
+        } catch (e) {}
       }
     });
-
-    requestAnimationFrame(smoothPlayVideoLoop);
   }
-
-  // Iniciar loop de renderização suave
-  requestAnimationFrame(smoothPlayVideoLoop);
 
   // Ouvintes de Scroll
   window.addEventListener('scroll', () => {

@@ -150,38 +150,14 @@ document.addEventListener('DOMContentLoaded', () => {
       progress = Math.max(0, Math.min(1, progress));
 
       if (scrubber.video.duration) {
-        scrubber.targetTime = progress * scrubber.video.duration;
-      }
-    });
-  }
-
-  function smoothPlayVideoLoop() {
-    videoScrubbers.forEach(scrubber => {
-      if (!scrubber.loaded || !scrubber.video) return;
-
-      if (isElementInViewport(scrubber.section)) {
-        const easing = 0.08; // Valor de easing otimizado para scroll de toque
-        const diff = scrubber.targetTime - scrubber.currentTime;
-
-        if (Math.abs(diff) < 0.01) {
-          scrubber.currentTime = scrubber.targetTime;
-        } else {
-          scrubber.currentTime += diff * easing;
-        }
-
         try {
-          scrubber.video.currentTime = scrubber.currentTime;
+          // Atribuição direta sem lerp para ser 100% responsivo e sincronizado com o dedo
+          scrubber.video.currentTime = progress * scrubber.video.duration;
         } catch (e) {}
       }
     });
-
-    requestAnimationFrame(smoothPlayVideoLoop);
-  }
-
-  requestAnimationFrame(smoothPlayVideoLoop);
-
+  // Loop removido, atualizando diretamente via listener de scroll
   window.addEventListener('scroll', () => {
-    updateVideoTargets();
     animateOnScroll();
   });
 
