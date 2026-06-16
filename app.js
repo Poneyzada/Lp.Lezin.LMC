@@ -48,32 +48,53 @@ document.addEventListener('DOMContentLoaded', () => {
   // Monitorar carregamento dos metadados de cada vídeo
   videoScrubbers.forEach(scrubber => {
     const v = scrubber.video;
+    if (!v) return;
 
-    // Se já estiver pronto
-    if (v.readyState >= 1) {
-      scrubber.loaded = true;
-      checkAllAssetsLoaded();
-    } else {
-      v.addEventListener('loadedmetadata', () => {
+    // Força o carregamento do recurso no navegador
+    v.load();
+
+    // Timeout de segurança (2.5s) caso o navegador bloqueie o carregamento prévio em redes móveis
+    const timeoutId = setTimeout(() => {
+      if (!scrubber.loaded) {
+        console.log("Pre-load fallback acionado para:", v.id);
         scrubber.loaded = true;
         checkAllAssetsLoaded();
-      });
+      }
+    }, 2500);
+
+    const onVideoLoaded = () => {
+      clearTimeout(timeoutId);
+      if (!scrubber.loaded) {
+        scrubber.loaded = true;
+        // Garante que o primeiro frame seja renderizado pelo navegador
+        try {
+          v.currentTime = 0.001;
+        } catch (e) {}
+        checkAllAssetsLoaded();
+      }
+    };
+
+    if (v.readyState >= 1) {
+      onVideoLoaded();
+    } else {
+      v.addEventListener('loadedmetadata', onVideoLoaded);
     }
 
     // Fallback caso o browser bloqueie ou demore muito
     v.addEventListener('error', () => {
+      clearTimeout(timeoutId);
       console.warn('Erro ao carregar vídeo, continuando fluxo de carregamento...');
-      scrubber.loaded = true; // Força para não travar a tela de loader
+      scrubber.loaded = true; 
       checkAllAssetsLoaded();
     });
   });
 
   // Fallback geral de carregamento da página inteira (após 5s, se travar por codec de vídeo)
   window.addEventListener('load', () => {
-    progressBar.style.width = '100%';
-    loaderStatus.textContent = 'Carregamento finalizado';
+    if (progressBar) progressBar.style.width = '100%';
+    if (loaderStatus) loaderStatus.textContent = 'Carregamento finalizado';
     setTimeout(() => {
-      if (!loader.classList.contains('loaded')) {
+      if (loader && !loader.classList.contains('loaded')) {
         loader.classList.add('loaded');
       }
     }, 400);
@@ -107,14 +128,14 @@ document.addEventListener('DOMContentLoaded', () => {
       let startScrub, endScrub;
 
       if (scrubber.section.id === 'hero') {
-        // Para a hero, começa do 0 e termina em 85% da rolagem sticky
+        // Para a hero, começa do 0 e termina em 70% da rolagem sticky
         startScrub = 0;
-        endScrub = stickyRange * 0.85;
+        endScrub = stickyRange * 0.70;
       } else {
         // Para outras seções, começa um pouco antes de fixar (ex: quando o topo está a 20% do fundo da tela)
         startScrub = sectionTop - windowHeight * 0.2;
-        // E termina quando a rolagem sticky chega a 85%
-        endScrub = sectionTop + stickyRange * 0.85;
+        // E termina quando a rolagem sticky chega a 70%
+        endScrub = sectionTop + stickyRange * 0.70;
       }
 
       const range = endScrub - startScrub;

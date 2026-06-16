@@ -181,7 +181,7 @@ body {
 
 .scroll-bound {
   position: relative;
-  height: 140vh; /* Scroll mais curto e responsivo para mobile */
+  height: 180vh; /* Altura ideal de scroll no mobile para reproduzir o clipe */
   width: 100%;
 }
 

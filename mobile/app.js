@@ -46,17 +46,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const v = scrubber.video;
     if (!v) return;
 
-    if (v.readyState >= 1) {
-      scrubber.loaded = true;
-      checkAllAssetsLoaded();
-    } else {
-      v.addEventListener('loadedmetadata', () => {
+    // Força o carregamento do recurso no mobile
+    v.load();
+
+    // Timeout de segurança (2.5s) caso o navegador mobile bloqueie o carregamento prévio
+    const timeoutId = setTimeout(() => {
+      if (!scrubber.loaded) {
+        console.log("Pre-load fallback mobile acionado para:", v.id);
         scrubber.loaded = true;
         checkAllAssetsLoaded();
-      });
+      }
+    }, 2500);
+
+    const onVideoLoaded = () => {
+      clearTimeout(timeoutId);
+      if (!scrubber.loaded) {
+        scrubber.loaded = true;
+        // Força renderização do primeiro frame no mobile (Safari iOS fix)
+        try {
+          v.currentTime = 0.001;
+        } catch (e) {}
+        checkAllAssetsLoaded();
+      }
+    };
+
+    if (v.readyState >= 1) {
+      onVideoLoaded();
+    } else {
+      v.addEventListener('loadedmetadata', onVideoLoaded);
     }
 
     v.addEventListener('error', () => {
+      clearTimeout(timeoutId);
+      console.warn('Erro ao carregar vídeo no mobile, continuando...');
       scrubber.loaded = true;
       checkAllAssetsLoaded();
     });
@@ -97,10 +119,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (scrubber.section.id === 'hero') {
         startScrub = 0;
-        endScrub = stickyRange * 0.85;
+        endScrub = stickyRange * 0.70;
       } else {
         startScrub = sectionTop - windowHeight * 0.25; // Começa um pouco antes no mobile
-        endScrub = sectionTop + stickyRange * 0.85;
+        endScrub = sectionTop + stickyRange * 0.70;
       }
 
       const range = endScrub - startScrub;
