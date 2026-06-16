@@ -259,9 +259,9 @@ body {
 
 .scroll-bound {
   position: relative;
-  height: 180vh; /* Espaço para o scrub suave */
+  height: 250vh; /* Muito mais espaço para um scrub SUPER suave e lento */
   width: 100%;
-  background: radial-gradient(ellipse at center, #0a0a0c 0%, var(--bg-primary) 100%);
+  background: var(--bg-primary);
 }
 
 .sticky-container {
