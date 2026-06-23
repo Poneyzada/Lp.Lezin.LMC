@@ -131,13 +131,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const sectionRect = scrubber.section.getBoundingClientRect();
       const sectionTop = scrollY + sectionRect.top;
       const sectionHeight = scrubber.section.offsetHeight;
-      const stickyRange = sectionHeight - windowHeight;
+      let startScrub, endScrub;
 
-      // Sem sticky: o vídeo entra e sai da tela normalmente.
-      // startScrub: o topo da seção entra no fundo da tela
-      let startScrub = sectionTop - windowHeight;
-      // endScrub: o fundo da seção sai do topo da tela
-      let endScrub = sectionTop + sectionHeight;
+      if (scrubber.section.id === 'hero') {
+        // Hero começa perfeitamente no zero (topo)
+        startScrub = 0;
+        // E vai até a dobra sair 100% da tela (garante que volta pro 0)
+        endScrub = sectionHeight;
+      } else {
+        // Para as outras dobras, só começa a tocar quando a dobra já preencheu pelo menos metade da tela
+        // (Isso resolve o vídeo gastando a animação de 'tirar a venda' muito cedo)
+        startScrub = sectionTop - (windowHeight * 0.4);
+        // Termina quando a seção está quase totalmente fora
+        endScrub = sectionTop + (sectionHeight * 0.8);
+      }
 
       const range = endScrub - startScrub;
       let progress = (scrollY - startScrub) / range;
